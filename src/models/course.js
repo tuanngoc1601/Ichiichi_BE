@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     };
     Course.init({
         description: DataTypes.TEXT,
-        image: DataTypes.STRING
+        image: DataTypes.STRING(500)
     }, {
         sequelize,
         modelName: 'Course',
