@@ -6,7 +6,10 @@ import {storage} from './firebaseConfig';
 
 
 async function uploadVideo(file) {
-
+  const videoRef = ref(storage, "videos/" + file);
+  uploadBytes(videoRef, file).then((snapshot) => {
+    console.log("Uploading file " + file);
+  });
 }
 
 async function getVideoUrl(filename) {

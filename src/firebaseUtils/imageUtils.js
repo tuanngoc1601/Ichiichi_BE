@@ -2,12 +2,15 @@
 import 'firebase/storage';
 // import { firebaseConfig } from './firebaseConfig';
 import {storage} from './firebaseConfig';
-import { ref, getDownloadURL } from 'firebase/storage';
+import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 // firebase.initializeApp(firebaseConfig);
 
 
 async function uploadImage(file) {
-
+  const imageRef = ref(storage, "images/" + file);
+  uploadBytes(imageRef, file).then((snapshot) => {
+    console.log("Uploading file " + file);
+  });
 }
 
 async function getImageUrl(filename) {

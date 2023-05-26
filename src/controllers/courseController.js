@@ -1,28 +1,4 @@
-import {getImageUrl} from "../firebaseUtils/imageUtils"
-import { getVideoUrl } from "../firebaseUtils/videoUtils";
 import {getAllWords, getAllCourses, getVideoofWord} from '../services/courseService';
-let getIUrl = async (req, res) => { 
-    // console.log(req.query);  
-    const url = await getImageUrl(req.query.image_name);
-    if (!url) {
-        return res.status(404).json({ 
-            message: "Image not found"
-    })}
-    return res.status(200).json({
-        url: url
-    });
-}
-
-let getVUrl = async (req, res) => {
-    const url = await getVideoUrl(req.query.video_name);
-    if (!url) {
-        return res.status(404).json({ 
-            message: "Video not found"
-    })}
-    return res.status(200).json({
-        url: url
-    });
-}
 
 let handleGetAllWords = async (req, res) =>{ // from contents table
     const courseID = req.query.course_id;
@@ -66,9 +42,7 @@ let handleVideoofWord = async (req, res) =>{ // from details table
 
 
 module.exports = {
-    getIUrl: getIUrl,
-    getVUrl: getVUrl,
     handleGetAllWords: handleGetAllWords,
     handleGetAllCourses: handleGetAllCourses,
     handleVideoofWord: handleVideoofWord
-}
+} 
