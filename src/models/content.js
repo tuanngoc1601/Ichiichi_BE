@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Content.init({
-        content: DataTypes.STRING,
-        type: DataTypes.STRING,
-        mean: DataTypes.STRING,
+        content: DataTypes.STRING(500),
+        type: DataTypes.STRING(45),
+        mean: DataTypes.STRING(500),
         course_id: DataTypes.INTEGER
     }, {
         sequelize,

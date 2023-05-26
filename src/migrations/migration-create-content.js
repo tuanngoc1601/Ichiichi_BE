@@ -9,13 +9,13 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             content: {
-                type: Sequelize.STRING,
+                type: Sequelize.STRING(500)
             },
             type: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING(45)
             },
             mean: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING(500)
             },
             course_id: {
                 type: Sequelize.INTEGER

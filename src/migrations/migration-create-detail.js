@@ -9,10 +9,13 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             link: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING(500)
             },
             content_id: {
                 type: Sequelize.INTEGER
+            },
+            description:{
+                type: Sequelize.STRING(500)
             },
             
             createdAt: {

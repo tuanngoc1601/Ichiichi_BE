@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Test.init({
-        title: DataTypes.STRING,
+        title: DataTypes.STRING(50),
         detail: DataTypes.TEXT,
         right_answer: DataTypes.INTEGER,
         wrong_answer_first: DataTypes.INTEGER,
