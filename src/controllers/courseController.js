@@ -1,4 +1,4 @@
-import { getAllWords, getWordById, getAllCourses, getVideoofWord } from '../services/courseService';
+import { getAllWords, getWordById, getAllCourses, getSearchCourseTerm, getVideoofWord } from '../services/courseService';
 
 let handleGetAllWords = async (req, res) => { // from contents table
     const courseID = req.query.course_id;
@@ -55,6 +55,22 @@ let handleGetAllCourses = async (req, res) => { // from course table table
     })
 }
 
+let handleSearchCourse = async (req, res) => {
+    const searchTerm = req.body.searchTerm;
+    if(searchTerm === '') {
+        return res.status(500).json({
+            errorCode: 1,
+            message: 'Invalid search term'
+        })
+    }
+    let searchCourse = await getSearchCourseTerm(searchTerm);
+    return res.status(200).json({
+        errorCode: 0,
+        message: 'Ok',
+        searchCourse: searchCourse
+    })
+}
+
 let handleVideoofWord = async (req, res) => { // from details table 
     let content_id = req.query.content_id;
     let VideoOfWords = await getVideoofWord(content_id);
@@ -74,5 +90,6 @@ module.exports = {
     handleGetAllWords: handleGetAllWords,
     handleGetWordById: handleGetWordById,
     handleGetAllCourses: handleGetAllCourses,
+    handleSearchCourse: handleSearchCourse,
     handleVideoofWord: handleVideoofWord
 } 

@@ -14,6 +14,7 @@ let initWebRoutes = (app) => {
     router.get("/api/get-all-words", courseController.handleGetAllWords);
     router.get("/api/get-word", courseController.handleGetWordById);
     router.get("/api/get-all-courses", courseController.handleGetAllCourses);
+    router.post("/api/search-course", courseController.handleSearchCourse);
     router.get("/api/get-content", courseController.handleVideoofWord);
     return app.use("/", router);
 }

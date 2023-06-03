@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import db from "../models/index";
 
 let getAllWords = (course_id) => {
@@ -40,6 +41,23 @@ let getAllCourses = () => {
     })
 }
 
+let getSearchCourseTerm = (searchTerm) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let data = await db.Course.findAll({
+                where: {
+                    title: {
+                        [Op.like]: '%' + searchTerm + '%'
+                    }
+                }
+            })
+            resolve(data);
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let getVideoofWord = (content_id) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -63,5 +81,6 @@ module.exports = {
     getAllWords: getAllWords,
     getWordById: getWordById,
     getAllCourses: getAllCourses,
+    getSearchCourseTerm: getSearchCourseTerm,
     getVideoofWord: getVideoofWord
 }
