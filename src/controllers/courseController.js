@@ -81,8 +81,8 @@ let handleVideoofWord = async (req, res) => { // from details table
     }
     let VideoOfWords = await getVideoofWord(content_id);
     if (VideoOfWords.length === 0) {
-        return res.status(404).json({
-            errorCode: 2,
+        return res.status(200).json({
+            errorCode: 0,
             message: "No Video found",
             VideoOfWords: []
         })
