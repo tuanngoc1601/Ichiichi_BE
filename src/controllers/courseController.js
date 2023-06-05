@@ -73,14 +73,23 @@ let handleSearchCourse = async (req, res) => {
 
 let handleVideoofWord = async (req, res) => { // from details table 
     let content_id = req.query.content_id;
+    if(!content_id) {
+        return res.status(500).json({ 
+            errorCode: 1,
+            message: 'Missing required parameter'
+        })
+    }
     let VideoOfWords = await getVideoofWord(content_id);
-    if (!VideoOfWords) {
+    if (VideoOfWords.length === 0) {
         return res.status(404).json({
+            errorCode: 2,
             message: "No Video found",
             VideoOfWords: []
         })
     }
     return res.status(200).json({
+        errorCode: 0,
+        message: 'OK',
         VideoOfWords: VideoOfWords
     })
 }

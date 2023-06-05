@@ -42,7 +42,7 @@ let getAllCourses = () => {
 }
 
 let getSearchCourseTerm = (searchTerm) => {
-    return new Promise(async(resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         try {
             let data = await db.Course.findAll({
                 where: {
@@ -61,14 +61,10 @@ let getSearchCourseTerm = (searchTerm) => {
 let getVideoofWord = (content_id) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let res = {};
-            let VideoOfWord = await db.Detail.findAll({
+            let data = await db.Detail.findAll({
                 where: { content_id: content_id }
-            }
-            );
-            res.errorCode = 0;
-            res.data = VideoOfWord;
-            resolve(res);
+            });
+            resolve(data);
         } catch (e) {
             reject(e);
         }
