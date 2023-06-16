@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "123456",
     "database": "ichiichi_itss",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
