@@ -1,6 +1,7 @@
 import express from 'express';
 import userController from '../controllers/userController';
 import courseController from '../controllers/courseController';
+import testController from '../controllers/testController';
 
 let router = express.Router();
 
@@ -16,6 +17,12 @@ let initWebRoutes = (app) => {
     router.get("/api/get-all-courses", courseController.handleGetAllCourses);
     router.post("/api/search-course", courseController.handleSearchCourse);
     router.get("/api/get-content", courseController.handleVideoofWord);
+
+    router.get("/api/get-right-answer", testController.handleAnswer);
+    router.get("/api/get-question", testController.handleQuestion);
+    router.get("/api/get-all-answer", testController.handleAnswer);
+    router.get("/api/get-all-question",testController.handleGetAllQuestions);
+
     return app.use("/", router);
 }
 
