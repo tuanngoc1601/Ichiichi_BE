@@ -33,8 +33,8 @@ let handleAnswer = async (req, res) => {
         message: "OK",
         right_answer: right_answer,
         wrong_answer_first: wrong_answer_first,
-        wrong_answer_second:wrong_answer_second,
-        wrong_answer_third:wrong_answer_third
+        wrong_answer_second: wrong_answer_second,
+        wrong_answer_third: wrong_answer_third
     });
 };
 

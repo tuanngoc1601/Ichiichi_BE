@@ -9,7 +9,7 @@ let handleGetAllWords = async (req, res) => { // from contents table
         })
     }
     let listWords = await getAllWords(courseID);
-    if(listWords.length === 0) {
+    if (listWords.length === 0) {
         return res.status(404).json({
             errorCode: 2,
             message: "Words not found",
@@ -25,7 +25,7 @@ let handleGetAllWords = async (req, res) => { // from contents table
 
 let handleGetWordById = async (req, res) => {
     const id = req.query.id;
-    if(!id) {
+    if (!id) {
         return res.status(500).json({
             errorCode: 1,
             message: 'Missing required parameter'
@@ -57,7 +57,7 @@ let handleGetAllCourses = async (req, res) => { // from course table table
 
 let handleSearchCourse = async (req, res) => {
     const searchTerm = req.body.searchTerm;
-    if(searchTerm === '') {
+    if (searchTerm === '') {
         return res.status(500).json({
             errorCode: 1,
             message: 'Invalid search term'
@@ -73,8 +73,8 @@ let handleSearchCourse = async (req, res) => {
 
 let handleVideoofWord = async (req, res) => { // from details table 
     let content_id = req.query.content_id;
-    if(!content_id) {
-        return res.status(500).json({ 
+    if (!content_id) {
+        return res.status(500).json({
             errorCode: 1,
             message: 'Missing required parameter'
         })

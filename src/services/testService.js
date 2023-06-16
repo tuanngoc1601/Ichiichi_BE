@@ -18,7 +18,7 @@ let getAllQuestions = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             let data = await db.Test.findAll({
-                where: { course_id : id }
+                where: { course_id: id }
             });
             resolve(data);
         } catch (e) {

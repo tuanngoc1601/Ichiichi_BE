@@ -21,7 +21,7 @@ let initWebRoutes = (app) => {
     router.get("/api/get-right-answer", testController.handleAnswer);
     router.get("/api/get-question", testController.handleQuestion);
     router.get("/api/get-all-answer", testController.handleAnswer);
-    router.get("/api/get-all-question",testController.handleGetAllQuestions);
+    router.get("/api/get-all-question", testController.handleGetAllQuestions);
 
     return app.use("/", router);
 }
