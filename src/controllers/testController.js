@@ -73,7 +73,7 @@ let handleGetAllQuestions = async (req, res) => {
 }
 
 module.exports = {
-    handleAnswer: handleGetRightAnswer,
+    handleGetRightAnswer: handleGetRightAnswer,
     handleQuestion: handleQuestion,
     handleAnswer: handleAnswer,
     handleGetAllQuestions: handleGetAllQuestions
