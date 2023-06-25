@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     Detail.init({
         link: DataTypes.STRING(500),
         content_id: DataTypes.STRING,
-        description: DataTypes.STRING(500)
+        description: DataTypes.STRING(500),
+        title: DataTypes.STRING
     }, {
         sequelize,
         modelName: 'Detail',
