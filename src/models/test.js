@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         wrong_answer_second: DataTypes.INTEGER,
         wrong_answer_third: DataTypes.INTEGER,
         course_id: DataTypes.INTEGER,
+        explanation: DataTypes.STRING,
     }, {
         sequelize,
         modelName: 'Test',
