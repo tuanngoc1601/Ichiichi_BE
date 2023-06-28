@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
         title: DataTypes.STRING(100),
         description: DataTypes.TEXT,
         image: DataTypes.STRING(500),
-        process: DataTypes.FLOAT,
     }, {
         sequelize,
         modelName: 'Course',

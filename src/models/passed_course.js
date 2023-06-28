@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     };
     Passed_Course.init({
         user_id: DataTypes.INTEGER,
-        course_id: DataTypes.INTEGER
+        course_id: DataTypes.INTEGER,
+        result:DataTypes.INTEGER,
+        process:DataTypes.FLOAT,
     }, {
         sequelize,
         modelName: 'Passed_Course',
