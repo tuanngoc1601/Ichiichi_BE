@@ -48,12 +48,13 @@ let handleGetRightAnswer = async (req, res) => {
         })
     }
     let question = await getQuestion(id);
-    const { right_answer } = question;
+    const { right_answer, explanation } = question;
     res.status(200).send({
         errorCode: 0,
         message: "OK",
-        right_answer: right_answer
-    });
+        right_answer: right_answer,
+        explanation: explanation
+    })
 };
 
 let handleGetAllQuestions = async (req, res) => {
@@ -73,7 +74,7 @@ let handleGetAllQuestions = async (req, res) => {
 }
 
 module.exports = {
-    handleAnswer: handleGetRightAnswer,
+    handleGetRightAnswer: handleGetRightAnswer,
     handleQuestion: handleQuestion,
     handleAnswer: handleAnswer,
     handleGetAllQuestions: handleGetAllQuestions

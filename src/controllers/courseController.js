@@ -1,4 +1,4 @@
-import { getAllWords, getWordById, getAllCourses, getSearchCourseTerm, getVideoofWord } from '../services/courseService';
+import { getAllWords, getWordById, getAllCourses, getSearchCourseTerm, getVideoofWord, getAllPassedCourses, getWatchedVid } from '../services/courseService';
 
 let handleGetAllWords = async (req, res) => { // from contents table
     const courseID = req.query.course_id;
@@ -39,9 +39,28 @@ let handleGetWordById = async (req, res) => {
     })
 }
 
+
 let handleGetAllCourses = async (req, res) => { // from course table table
+    const userId = req.query.user_id;
     let courses = await getAllCourses();
-    if (courses.length === 0) {
+    //console.log(courses)
+    let passedCourses = await getAllPassedCourses();
+
+    let output = [];
+    courses.forEach(e => {
+        let process_course = passedCourses.find(ee => ee.course_id == e.id);
+        let i = 0;
+
+        if (process_course && process_course.user_id == userId) {
+          output.push({...e, process : process_course.process, result : process_course.result });
+        //   console.log(1)
+        //   console.log(output)
+        } else {
+          output.push({...e});
+        }
+    });
+
+    if (output.length === 0) {
         return res.status(404).json({
             errorCode: 0,
             message: "NO Course not found",
@@ -51,7 +70,7 @@ let handleGetAllCourses = async (req, res) => { // from course table table
     return res.status(200).json({
         errorCode: 0,
         message: "OK",
-        allCourses: courses
+        allCourses: output
     })
 }
 
@@ -94,11 +113,29 @@ let handleVideoofWord = async (req, res) => { // from details table
     })
 }
 
+let handleGetWatchedVid = async (req, res) => {
+    const userId = req.query.user_id;
+    const contentId = req.query.cont_id;
+    if(!userId || !contentId) {
+        return res.status(500).json({
+            errorCode: 1,
+            message: 'Missing required parameter'
+        })
+    }
+    let Video = await getWatchedVid(userId, contentId);
+    return res.status(200).json({
+        errorCode: 0,
+        message: 'Ok',
+        WatchedVid: Video
+    })
+}
+
 
 module.exports = {
     handleGetAllWords: handleGetAllWords,
     handleGetWordById: handleGetWordById,
     handleGetAllCourses: handleGetAllCourses,
     handleSearchCourse: handleSearchCourse,
-    handleVideoofWord: handleVideoofWord
+    handleVideoofWord: handleVideoofWord,
+    handleGetWatchedVid: handleGetWatchedVid
 } 

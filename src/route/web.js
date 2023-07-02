@@ -18,10 +18,12 @@ let initWebRoutes = (app) => {
     router.post("/api/search-course", courseController.handleSearchCourse);
     router.get("/api/get-content", courseController.handleVideoofWord);
 
-    router.get("/api/get-right-answer", testController.handleAnswer);
+    router.get("/api/get-right-answer", testController.handleGetRightAnswer);
     router.get("/api/get-question", testController.handleQuestion);
     router.get("/api/get-all-answer", testController.handleAnswer);
     router.get("/api/get-all-question",testController.handleGetAllQuestions);
+
+    router.get("/api/get-watched-video",courseController.handleGetWatchedVid);
 
     return app.use("/", router);
 }

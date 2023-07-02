@@ -32,7 +32,20 @@ let getWordById = (id) => {
 let getAllCourses = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = await db.Course.findAll();
+            let data = await db.Course.findAll({raw : true});
+            //console.log(data);
+            resolve(data);
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getAllPassedCourses = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.Passed_Course.findAll({raw:true});
             resolve(data);
         }
         catch (e) {
@@ -71,6 +84,18 @@ let getVideoofWord = (content_id) => {
     })
 }
 
+let getWatchedVid = (user_id,content_id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.User_Course_Content_Detail.findAll({
+                where: { user_id: user_id, content_id:content_id }
+            });
+            resolve(data);
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 
 
 module.exports = {
@@ -78,5 +103,7 @@ module.exports = {
     getWordById: getWordById,
     getAllCourses: getAllCourses,
     getSearchCourseTerm: getSearchCourseTerm,
-    getVideoofWord: getVideoofWord
+    getVideoofWord: getVideoofWord,
+    getAllPassedCourses: getAllPassedCourses,
+    getWatchedVid: getWatchedVid
 }
