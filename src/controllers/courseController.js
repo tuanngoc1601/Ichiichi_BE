@@ -1,4 +1,4 @@
-import { getAllWords, getWordById, getAllCourses, getSearchCourseTerm, getVideoofWord, getAllPassedCourses, getWatchedVid } from '../services/courseService';
+import { getAllWords, getWordById, getAllCourses, getSearchCourseTerm, getVideoofWord, getAllPassedCourses, getWatchedVid, postWatchedVid  } from '../services/courseService';
 
 let handleGetAllWords = async (req, res) => { // from contents table
     const courseID = req.query.course_id;
@@ -130,6 +130,49 @@ let handleGetWatchedVid = async (req, res) => {
     })
 }
 
+// let handleProcess = async (req, res) => {
+//     try {
+//         const { user_id, course_id } = req.body;
+//         //console.log(user_id,course_id, content_id,detail_id)
+    
+//         // Create a new record in the watched_video table
+//         const process = await calcProcess(user_id,course_id)
+    
+//         // Return the newly created record as the API response
+//         return res.status(200).json({
+//             errorCode: 0,
+//             message: "Saved",
+//             Process: process
+//         })
+//       } catch (error) {
+//         console.error('Error update process', error);
+//         return res.status(500).json({ error: 'Internal server error' });
+//       }
+// }
+
+
+let handleNewWatchedVideo = async (req , res) =>{
+    try {
+        const { user_id, course_id, content_id, detail_id } = req.body;
+        //console.log(user_id,course_id, content_id,detail_id)
+    
+        // Create a new record in the watched_video table
+        const newWatchedVideo = await postWatchedVid(user_id,course_id,content_id,detail_id)
+    
+        // Return the newly created record as the API response
+        return res.status(200).json({
+            errorCode: 0,
+            message: "Saved",
+            Watched: newWatchedVideo
+        })
+      } catch (error) {
+        console.error('Error creating new watched video record:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+
+}
+
+
 
 module.exports = {
     handleGetAllWords: handleGetAllWords,
@@ -137,5 +180,7 @@ module.exports = {
     handleGetAllCourses: handleGetAllCourses,
     handleSearchCourse: handleSearchCourse,
     handleVideoofWord: handleVideoofWord,
-    handleGetWatchedVid: handleGetWatchedVid
+    handleGetWatchedVid: handleGetWatchedVid,
+    handleNewWatchedVideo: handleNewWatchedVideo,
+    // handleProcess:handleProcess
 } 
