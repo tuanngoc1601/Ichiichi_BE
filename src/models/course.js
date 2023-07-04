@@ -11,13 +11,14 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Course.hasMany(models.Passed_Course, { foreignKey: 'course_id' });
+            Course.hasMany(models.Content, { foreignKey: 'course_id' });
         }
     };
     Course.init({
         title: DataTypes.STRING(100),
         description: DataTypes.TEXT,
-        image: DataTypes.STRING(500),
-        process: DataTypes.FLOAT,
+        image: DataTypes.STRING(500)
     }, {
         sequelize,
         modelName: 'Course',

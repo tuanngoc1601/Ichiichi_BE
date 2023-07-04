@@ -1,4 +1,13 @@
-import { getAllWords, getWordById, getAllCourses, getSearchCourseTerm, getVideoofWord } from '../services/courseService';
+import { 
+    getAllWords, 
+    getWordById, 
+    getAllCourses, 
+    getSearchCourseTerm, 
+    getVideoofWord, 
+    createVideoWatchedService,
+    getAllVideoWatchedService,
+    updateProgressCourseService
+} from '../services/courseService';
 
 let handleGetAllWords = async (req, res) => { // from contents table
     const courseID = req.query.course_id;
@@ -94,11 +103,43 @@ let handleVideoofWord = async (req, res) => { // from details table
     })
 }
 
+let handleCreateVideoWatched = async (req, res) => {
+    let data = req.body;
+    let message = await createVideoWatchedService(data);
+    return res.status(200).json(message);
+}
+
+let handleGetAllVideoWatched = async (req, res) => {
+    let content_id = req.query.content_id;
+    if(!content_id) {
+        return res.status(500).json({
+            errorCode: 1,
+            message: 'Missing required parameter'
+        })
+    }
+    let data = await getAllVideoWatchedService(content_id);
+    return res.status(200).json(data);
+}
+
+let handleUpdateProgressCourse = async (req, res) => {
+    let course_id = req.query.course_id;
+    if(!course_id) {
+        return res.status(500).json({
+            errorCode: 1,
+            message: 'Missing required parameter'
+        })
+    }
+    let message = await updateProgressCourseService(course_id);
+    return res.status(200).json(message);
+}
 
 module.exports = {
     handleGetAllWords: handleGetAllWords,
     handleGetWordById: handleGetWordById,
     handleGetAllCourses: handleGetAllCourses,
     handleSearchCourse: handleSearchCourse,
-    handleVideoofWord: handleVideoofWord
+    handleVideoofWord: handleVideoofWord,
+    handleCreateVideoWatched: handleCreateVideoWatched,
+    handleGetAllVideoWatched: handleGetAllVideoWatched,
+    handleUpdateProgressCourse: handleUpdateProgressCourse
 } 

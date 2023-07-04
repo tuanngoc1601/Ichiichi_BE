@@ -1,4 +1,12 @@
-import { getQuestion, getAllQuestions } from '../services/testService';
+import { 
+    getQuestion, 
+    getAllQuestions, 
+    updateTestScore, 
+    createResultQuestion, 
+    getInCorrectQuestionSerivce, 
+    getRandomQuestionService,
+    getResultTestPreviewService
+} from '../services/testService';
 
 let handleQuestion = async (req, res) => {
     let testId = req.query.id;
@@ -48,11 +56,12 @@ let handleGetRightAnswer = async (req, res) => {
         })
     }
     let question = await getQuestion(id);
-    const { right_answer } = question;
+    const { right_answer, explanation } = question;
     res.status(200).send({
         errorCode: 0,
         message: "OK",
-        right_answer: right_answer
+        right_answer: right_answer,
+        explanation: explanation
     });
 };
 
@@ -72,9 +81,69 @@ let handleGetAllQuestions = async (req, res) => {
     });
 }
 
+let handleUpdateTestScore = async (req, res) => {
+    let data = req.body;
+    let message = await updateTestScore(data);
+    return res.status(200).json(message);
+}
+
+let handleCreateResultQuestion = async (req, res) => {
+    let data = req.body;
+    let message = await createResultQuestion(data);
+    return res.status(200).json(message);
+}
+
+let handleGetIncorrectQuestion = async (req, res) => {
+    let limit = parseInt(req.query.limit);
+    if(!limit) limit = 5;
+    try {
+        let data = await getInCorrectQuestionSerivce(limit);
+        return res.status(200).json(data);
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({ 
+            errorCode: -1,
+            message: 'Error from server...'
+        })
+    }
+}
+
+let handleGetRandomQuestion = async (req, res) => {
+    let limit = parseInt(req.query.limit);
+    if(!limit) limit = 5;
+    try {
+        let data = await getRandomQuestionService(limit);
+        return res.status(200).json(data);
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({ 
+            errorCode: -1, 
+            message: 'Error from server...'
+        })
+    }
+}
+
+let handleGetResultTestPreview = async (req, res) => {
+    let user_id = req.query.user_id;
+    if(!user_id) {
+        return res.status(500).json({
+            errorCode: 1,
+            message: 'Missing required parameter'
+        })
+    }
+    let data = await getResultTestPreviewService(user_id);
+    return res.status(200).json(data);
+}
+
+
 module.exports = {
     handleGetRightAnswer: handleGetRightAnswer,
     handleQuestion: handleQuestion,
     handleAnswer: handleAnswer,
-    handleGetAllQuestions: handleGetAllQuestions
+    handleGetAllQuestions: handleGetAllQuestions,
+    handleUpdateTestScore: handleUpdateTestScore,
+    handleCreateResultQuestion: handleCreateResultQuestion,
+    handleGetIncorrectQuestion: handleGetIncorrectQuestion,
+    handleGetRandomQuestion: handleGetRandomQuestion,
+    handleGetResultTestPreview: handleGetResultTestPreview
 }

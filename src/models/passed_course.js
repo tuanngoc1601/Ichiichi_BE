@@ -11,11 +11,14 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Passed_Course.belongsTo(models.Course, { foreignKey: 'course_id' });
         }
     };
     Passed_Course.init({
         user_id: DataTypes.INTEGER,
-        course_id: DataTypes.INTEGER
+        course_id: DataTypes.INTEGER,
+        process: DataTypes.FLOAT,
+        score: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'Passed_Course',
