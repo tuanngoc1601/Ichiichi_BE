@@ -191,9 +191,14 @@ let getResultTestPreviewService = (user_id) => {
                 where: {
                     user_id: user_id
                 },
-                include: [
-                    { model: db.Test, attributes: { exclude: ['id'] } }
-                ],
+                include: [{ 
+                    model: db.Test, 
+                    attributes: { exclude: ['id'] }, 
+                    include: [{ 
+                        model: db.Course, 
+                        attributes: ['title']
+                    }]
+                }],
                 raw: true,
                 nest: true
             });
