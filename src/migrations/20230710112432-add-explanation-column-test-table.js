@@ -1,8 +1,10 @@
+'use strict';
+
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         return queryInterface.sequelize.transaction(t => {
             return Promise.all([
-                queryInterface.addColumn('users_tests', 'answer', {
+                queryInterface.addColumn('tests', 'explanation', {
                     type: Sequelize.DataTypes.STRING
                 }, { transaction: t })
             ]);
@@ -11,9 +13,10 @@ module.exports = {
     down: async (queryInterface, Sequelize) => {
         return queryInterface.sequelize.transaction(t => {
             return Promise.all([
-                queryInterface.removeColumn('users_tests', 'answer', { transaction: t }),
+                queryInterface.addColumn('tests', 'explanation', {
+                    type: Sequelize.DataTypes.STRING
+                }, { transaction: t })
             ]);
         });
     }
 };
-

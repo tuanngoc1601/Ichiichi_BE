@@ -1,7 +1,8 @@
 'use strict';
+
 module.exports = {
-    up: async(queryInterface, Sequelize) => {
-        await queryInterface.createTable('watched_videos', {
+    up: async (queryInterface, Sequelize) => {
+        await queryInterface.createTable('comments_details', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -11,14 +12,11 @@ module.exports = {
             user_id: {
                 type: Sequelize.INTEGER
             },
-            course_id: {
-                type: Sequelize.INTEGER
-            },
-            content_id: {
-                type: Sequelize.INTEGER
-            },
             detail_id: {
                 type: Sequelize.INTEGER
+            },
+            content: {
+                type: Sequelize.STRING(500)
             },
 
             createdAt: {
@@ -31,7 +29,7 @@ module.exports = {
             }
         });
     },
-    down: async(queryInterface, Sequelize) => {
-        await queryInterface.dropTable('watched_videos');
+    down: async (queryInterface, Sequelize) => {
+        await queryInterface.dropTable('comments_details');
     }
 };
