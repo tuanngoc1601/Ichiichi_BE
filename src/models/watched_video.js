@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         modelName: 'Watched_Video',
+        tableName: 'watched_videos'
     });
     return Watched_Video;
 };
