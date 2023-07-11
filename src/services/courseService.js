@@ -198,6 +198,8 @@ let updateProgressCourseService = (course_id) => {
             } else {
                 resolve({
                     errorCode: 1,
+                    type: typeof course_id,
+                    course_id: course_id,
                     message: 'Not found course!'
                 })
             }
